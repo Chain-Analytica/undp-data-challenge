@@ -1,3 +1,5 @@
+
+## Train & Infer Weed Detection 
 Download the dataset from:
 https://www.kaggle.com/vbookshelf/v2-plant-seedlings-dataset
 
@@ -44,3 +46,7 @@ Evaluate.py
 
 For inference run
 infer.py
+
+
+## Azure ML Workflow
+azure_ml_deployment directory contains the workflow to register the pre-trained model and deploy a weed detection API in Azure
