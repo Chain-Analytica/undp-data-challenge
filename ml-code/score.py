@@ -7,6 +7,8 @@ import cv2
 from skimage.morphology import closing, disk
 import numpy as np
 import json
+from PIL import Image
+import io
 
 # Called when the deployed service starts
 def init():
@@ -22,7 +24,8 @@ def init():
 def run(raw_data):
     try:
         start_at = time.time()
-        np_image = np.array(json.loads(raw_data)['data'])
+        pil_image = Image.open(io.BytesIO(bytearray(json.loads(raw_data)['data'])))
+        np_image = np.array(pil_image)
 #np_image = np.array(pil_image)
         my_threshold = 121
         my_radius = 2
