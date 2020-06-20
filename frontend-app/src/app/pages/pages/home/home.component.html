@@ -1,0 +1,121 @@
+<div  class="">
+    <div class="heading text-center">
+       <img src="assets/images/logo.png" style="width: 250px;" /><br>
+       <h1>Agri Smart</h1>
+    </div>
+    <div class="container">
+       <div class="width text-center">
+          <div style="margin:0" class="upload-btn-wrapper">
+             <label class="btn" for="picii">
+             <span>Click To Upload The Image</span>
+             <input type="file" (change)="fileChangeEvent($event)" id="picii" />
+             </label>
+          </div>
+          <div class="row">
+            <div (click) ="getClickedData(1)" class="col-md-4 marginimg">
+              <img src="assets/1.png" class="" style="width: 100%;" />
+            </div>
+            <div (click) ="getClickedData(2)" class="col-md-4 marginimg">
+                <img src="assets/2.png" class="" style="width: 100%;" />
+              </div>
+              <div (click) ="getClickedData(3)" class="col-md-4 marginimg">
+                  <img src="assets/3.png" class="" style="width: 100%;" />
+                </div>
+          </div>
+
+       </div>
+    </div>
+ </div>
+ <br>
+ <br>
+ <br>
+ <br>
+ <div *ngIf="!showFileUpload" class="result">
+    <div class="container">
+        <ngb-tabset [destroyOnHide]="false">
+            <ngb-tab   title="Weed Detection">
+               <ng-template ngbTabContent>
+                
+               </ng-template>
+            </ngb-tab>
+            <ngb-tab   title="Nutrition Requirements">
+               <ng-template ngbTabContent>
+                
+               </ng-template>
+            </ngb-tab>
+
+            <ngb-tab   title="Crop Health">
+                <ng-template ngbTabContent>
+
+                    <div class="row margin-bt" >
+                        <div class="col-md-2 "></div>
+                        <div class="col-md-3 ">
+                           <div class="blockC">
+                              <h4>Temperature</h4>
+                              31°C 
+                           </div>
+                        </div>
+                        <div class="col-md-3 ">
+                           <div class="blockC">
+                              <h4>Nitrogen level </h4>
+                              30 mg/kg
+                           </div>
+                        </div>
+                        <div class="col-md-3 ">
+                           <div class="blockC">
+                              <h4>Humidity</h4>
+                              70%
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <canvas baseChart style="width: 100%;height: 300px;" 
+                           [datasets]="lineChartData"
+                           [labels]="lineChartLabels"
+                           [options]="lineChartOptions"
+                           [colors]="lineChartColors"
+                           [legend]="lineChartLegend"
+                           [chartType]="lineChartType"
+                           [plugins]="lineChartPlugins"
+                           
+                           ></canvas>
+                        </div>
+                        <div class="col-md-6">
+                           <canvas baseChart style="width: 100%;height: 300px;" 
+                           [datasets]="lineChartDataW"
+                           [labels]="lineChartLabels"
+                           [options]="lineChartOptions"
+                           [colors]="lineChartColors"
+                           [legend]="lineChartLegend"
+                           [chartType]="lineChartType"
+                           [plugins]="lineChartPlugins"
+                           ></canvas>
+                        </div>
+                        <div class="col-md-6">
+                           <canvas baseChart style="width: 100%;height: 300px;" 
+                           [datasets]="lineChartDataH"
+                           [labels]="lineChartLabels"
+                           [options]="lineChartOptions"
+                           [colors]="lineChartColors"
+                           [legend]="lineChartLegend"
+                           [chartType]="lineChartType"
+                           [plugins]="lineChartPlugins"
+                          ></canvas>
+                        </div>
+                     </div>
+
+
+
+                </ng-template>
+             </ngb-tab>
+        </ngb-tabset>
+
+
+
+
+
+
+      
+    </div>
+ </div>
