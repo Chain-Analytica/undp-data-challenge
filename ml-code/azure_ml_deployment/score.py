@@ -9,6 +9,7 @@ import numpy as np
 import json
 from PIL import Image
 import io
+import base64
 
 # Called when the deployed service starts
 def init():
@@ -24,9 +25,8 @@ def init():
 def run(raw_data):
     try:
         start_at = time.time()
-        pil_image = Image.open(io.BytesIO(bytearray(json.loads(raw_data)['data'])))
+        pil_image = Image.open(io.BytesIO(base64.b64decode(json.loads(raw_data)['data'])))
         np_image = np.array(pil_image)
-#np_image = np.array(pil_image)
         my_threshold = 121
         my_radius = 2
         masked_image = segment_plant(np_image, my_threshold, my_radius)
@@ -34,9 +34,18 @@ def run(raw_data):
         dim_expanded_image = np.expand_dims(resized, axis=0)
         prediction = loaded_model.predict_classes(dim_expanded_image)
         print("Prediction completed")
+        classIndex = prediction[0]
+        classString = "weed" 
+        if classIndex == 4:
+            classString = "crop"
+        elif classIndex == 7:
+            classString = "crop"
+        elif classIndex == 11:
+            classString = "crop"
+        else:
+            classString = "weed"
         #Return prediction
-        return {"result": class_names[prediction[0]],"elapsed_time": time.time()-start_at}
-        #return {"result": "sugar beet","elapsed_time": time.time()-start_at}
+        return {"plant-type": classString,"classification": class_names[prediction[0]],"elapsed_time": time.time()-start_at}
     except Exception as e:
         error = str(e)
         return error
