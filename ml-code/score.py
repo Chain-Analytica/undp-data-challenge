@@ -14,16 +14,7 @@ def init():
     global class_names
     # Get the path where the deployed model can be found.
     model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), './models')
-    #model_json_path = osp.join(model_path, "model.json")
-    #model_weight_path = osp.join(model_path, "model.h5")
-    # load models
-    #json_file = open(model_json_path, 'r')
-    #loaded_model_json = json_file.read()
-    #json_file.close()
-    #loaded_model = {"test"}
-    #loaded_model = model_from_json(loaded_model_json)
     loaded_model = load_model(model_path + '/model.h5')
-    #loaded_model.load_weights(model_weight_path)
     loaded_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     class_names = ['Black-grass', 'Charlock', 'Cleavers', 'Common Chickweed', 'Common wheat', 'Fat Hen', 'Loose Silky-bent', 'Maize', 'Scentless Mayweed', 'ShepherdGÇÖs Purse', 'Small-flowered Cranesbill', 'Sugar beet']
 
@@ -40,7 +31,6 @@ def run(raw_data):
         dim_expanded_image = np.expand_dims(resized, axis=0)
         prediction = loaded_model.predict_classes(dim_expanded_image)
         print("Prediction completed")
-        #print("result: " + class_names[prediction[0]])
         #Return prediction
         return {"result": class_names[prediction[0]],"elapsed_time": time.time()-start_at}
         #return {"result": "sugar beet","elapsed_time": time.time()-start_at}
